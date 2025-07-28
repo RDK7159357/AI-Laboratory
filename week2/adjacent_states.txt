@@ -1,0 +1,32 @@
+Oregon,California
+Oregon,Washington
+Oregon,Idaho
+Oregon,Nevada
+California,Arizona
+California,Nevada
+Washington,Idaho
+Mississippi,Louisiana
+Mississippi,Arkansas
+Mississippi,Tennessee
+Mississippi,Alabama
+Arkansas,Missouri
+Arkansas,Tennessee
+Arkansas,Louisiana
+Arkansas,Texas
+Arkansas,Oklahoma
+Kentucky,Missouri
+Kentucky,Illinois
+Kentucky,Indiana
+Kentucky,Ohio
+Kentucky,West Virginia
+Kentucky,Virginia
+Kentucky,Tennessee
+Florida,Georgia
+Florida,Alabama
+Georgia,South Carolina
+Georgia,Tennessee
+Georgia,Alabama
+South Carolina,North Carolina
+North Carolina,Virginia
+North Carolina,Tennessee
+Virginia,West Virginia

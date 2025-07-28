@@ -1,0 +1,7 @@
+{
+  "world_size": 2,
+  "dirt_locations": ["A"],
+  "agent_start_location": "A",
+  "max_steps": 6,
+  "agent_type": "ModelBased"
+}
