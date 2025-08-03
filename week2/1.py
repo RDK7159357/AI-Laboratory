@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
     # Load the data from the JSON file
     try:
-        with open('relationships.json') as f:
+        with open('./week2/relationships.json') as f:
             d = json.load(f)
     except FileNotFoundError:
         print("Error: 'relationships.json' not found. Please create it.")

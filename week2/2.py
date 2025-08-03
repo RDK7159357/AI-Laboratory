@@ -10,8 +10,8 @@ if __name__ == '__main__':
     coastal = Relation()
 
     # 2. Define the input files
-    file_coastal = 'coastal_states.txt'
-    file_adjacent = 'adjacent_states.txt'
+    file_coastal = './week2/coastal_states.txt'
+    file_adjacent = './week2/adjacent_states.txt'
 
     # Check if data files exist
     if not os.path.exists(file_coastal) or not os.path.exists(file_adjacent):
