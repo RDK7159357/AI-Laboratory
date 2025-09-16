@@ -1,5 +1,6 @@
 from sympy import symbols
-from sympy.logic.boolalg import And, Or, Not, Implies, satisfiable
+from sympy.logic.boolalg import And, Or, Not, Implies
+from sympy.logic.inference import satisfiable
 
 # Simple parser for natural language → FOL
 def parse_sentence(sentence):
