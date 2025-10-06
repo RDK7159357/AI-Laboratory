@@ -48,9 +48,9 @@ def main():
 
     # Define slicing intervals using timestamps
     slices = {
-        "Full Range (Daily)": ('2024-01-01', '2024-01-12'),
+        "Full Range (30 Days)": ('2024-01-01', '2024-01-30'),
         "First Week": ('2024-01-01', '2024-01-07'),
-        "Specific Interval": ('2024-01-05', '2024-01-09')
+        "Mid-Month Interval": ('2024-01-10', '2024-01-20')
     }
     
     plt.figure(figsize=(12, 8))

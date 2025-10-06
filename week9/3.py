@@ -39,14 +39,13 @@ def main():
     print("-" * 40)
     
     # Plot the data by specifying the start and end years (Time-based slicing)
-    plt.figure(figsize=(12, 8))
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
     
     # Plotting for specific time period (2024)
-    plt.subplot(2, 1, 1)
-    ts_df['2024'].plot()
-    plt.title('Time-Series Data: All Series in 2024')
-    plt.ylabel('Value')
-    plt.grid(True)
+    ts_df.loc['2024'].plot(ax=ax1)
+    ax1.set_title('Time-Series Data: All Series in 2024')
+    ax1.set_ylabel('Value')
+    ax1.grid(True)
 
     # --- Filtering the data using conditions and then displaying it ---
     
@@ -63,13 +62,12 @@ def main():
     print(filtered_df.describe())
 
     # Plotting the filtered data points (only where condition is true)
-    plt.subplot(2, 1, 2)
-    ts_df['Series_Sum'].plot(label='Original Sum', alpha=0.5, linestyle='--')
-    filtered_df['Series_Sum'].plot(style='o', label='Filtered Points (C > 40)', color='red')
-    plt.title('Filtered Data: Series Sum (Points where Series C > 40)')
-    plt.ylabel('Value')
-    plt.legend()
-    plt.grid(True)
+    ts_df['Series_Sum'].plot(ax=ax2, label='Original Sum', alpha=0.5, linestyle='--')
+    filtered_df['Series_Sum'].plot(ax=ax2, style='o', label='Filtered Points (C > 40)', color='red')
+    ax2.set_title('Filtered Data: Series Sum (Points where Series C > 40)')
+    ax2.set_ylabel('Value')
+    ax2.legend()
+    ax2.grid(True)
     
     plt.tight_layout()
     plt.show()
