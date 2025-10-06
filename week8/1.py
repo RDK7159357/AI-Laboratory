@@ -33,9 +33,14 @@ breakfast_sunday(D) :- sunday(D).
 # Step 3: Load into Prolog
 def setup_prolog():
     prolog = Prolog()
-    for stmt in prolog_kb.strip().split("\n"):
-        if stmt.strip():
-            prolog.assertz(stmt.strip().rstrip("."))
+
+    # Process the multi-line string into individual facts
+    kb_string = prolog_kb.strip()
+    facts = [fact.strip() for fact in kb_string.split('.') if fact.strip()]
+    
+    for fact in facts:
+        prolog.assertz(fact)
+
     return prolog
 
 # Step 4: Ask queries
