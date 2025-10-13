@@ -75,3 +75,68 @@ member(X, [_|T]) :- member(X, T).
 
 % To run this, load the file into a Prolog interpreter (like SWI-Prolog) and type:
 % ?- diagnose.
+
+/* 
+==================== SAMPLE INPUT/OUTPUT ====================
+
+Example 1: Diagnosing Anorexia Nervosa
+---------------------------------------
+?- diagnose.
+This is an expert system for dignosis of mental disorders.
+There are several questions you need to answer for dignosis of mental disorders.
+
+Is the symptom - abnormal_eating_habits? yes.
+Is the mentality - strong_desire_to_be_thin? yes.
+Is the consequence - low_weight? yes.
+Is the food_amount - food_restriction? yes.
+Condition was diagnosed as anorexia_nervosa.
+true.
+
+Example 2: Diagnosing Autism
+-----------------------------
+?- diagnose.
+This is an expert system for dignosis of mental disorders.
+There are several questions you need to answer for dignosis of mental disorders.
+
+Is the symptom - abnormal_eating_habits? no.
+Is the condition - affected_nervous_system? yes.
+Is the brain_function - abnormal? yes.
+Is the cause - genetic_and_enviromental? yes.
+Is the social_skill - low? yes.
+Is the symptom - impaired_communication? yes.
+Condition was diagnosed as autism.
+true.
+
+Example 3: Diagnosing Schizophrenia
+------------------------------------
+?- diagnose.
+This is an expert system for dignosis of mental disorders.
+There are several questions you need to answer for dignosis of mental disorders.
+
+Is the symptom - abnormal_eating_habits? no.
+Is the condition - affected_nervous_system? no.
+Is the symptom - false_beliefs? yes.
+Is the mentality - manic_depressive? yes.
+Is the cause - genetic_and_enviromental? yes.
+Is the indication - hallucinations? yes.
+Condition was diagnosed as schizophrenia.
+true.
+
+Example 4: Diagnosing Down Syndrome
+------------------------------------
+?- diagnose.
+This is an expert system for dignosis of mental disorders.
+There are several questions you need to answer for dignosis of mental disorders.
+
+Is the symptom - abnormal_eating_habits? no.
+Is the condition - affected_nervous_system? no.
+Is the symptom - false_beliefs? no.
+Is the cause - abnormalities_in_genome? yes.
+Is the symptom - delayed_physical_growth? yes.
+Is the face_features - long_and_narrow? yes.
+Is the ears_features - large? yes.
+Is the brain_function - intellectual_disability? yes.
+Condition was diagnosed as down_syndrome.
+true.
+
+*/

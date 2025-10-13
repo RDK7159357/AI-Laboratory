@@ -63,3 +63,93 @@ start :- write('No more recommendations found based on your criteria.').
 
 % To run: load the file into a Prolog interpreter and type:
 % ?- start.
+
+/* 
+==================== SAMPLE INPUT/OUTPUT ====================
+
+Example 1: Happy user looking for comedy (200 minutes available)
+-----------------------------------------------------------------
+?- start.
+What is your name? john.
+What is your sex (male/female)? male.
+How are you feeling (sad/happy)? happy.
+How much time (in minutes) do you have? 200.
+What film genre are you interested in (drama/comedy)? comedy.
+Searching for recommendations...
+Recommended film for john: Seksmisja
+Recommended film for john: Forrest Gump
+Recommended film for john: Notykalni
+Recommended film for john: Kiler
+Recommended film for john: Mis
+Recommended film for john: Jak rozpetalem druga wojne swiatowa
+No more recommendations found based on your criteria.
+
+
+Example 2: Sad user looking for drama (150 minutes available)
+--------------------------------------------------------------
+?- start.
+What is your name? alice.
+What is your sex (male/female)? female.
+How are you feeling (sad/happy)? sad.
+How much time (in minutes) do you have? 150.
+What film genre are you interested in (drama/comedy)? drama.
+Searching for recommendations...
+Recommended film for alice: Pif Paf! Jestes trup
+Recommended film for alice: Dogville
+Recommended film for alice: Z dystansu
+Recommended film for alice: Lista Schindlera
+Recommended film for alice: Requiem dla snu
+Recommended film for alice: Biutiful
+Recommended film for alice: Czarny labedz
+Recommended film for alice: Gladiator
+Recommended film for alice: Dzien swira
+Recommended film for alice: Pianista
+No more recommendations found based on your criteria.
+
+
+Example 3: Happy user with limited time (100 minutes)
+------------------------------------------------------
+?- start.
+What is your name? bob.
+What is your sex (male/female)? male.
+How are you feeling (sad/happy)? happy.
+How much time (in minutes) do you have? 100.
+What film genre are you interested in (drama/comedy)? comedy.
+Searching for recommendations...
+No more recommendations found based on your criteria.
+
+
+Example 4: Getting all films by a specific actor
+-------------------------------------------------
+?- actor_films('Tom Hanks', Film).
+Film = 'Zielona mila' ;
+Film = 'Forrest Gump'.
+
+
+Example 5: Finding all drama films
+-----------------------------------
+?- film(Title, _, _, drama, _, _, _, _, _, _).
+Title = 'Zielona mila' ;
+Title = 'Pif Paf! Jestes trup' ;
+Title = 'Dogville' ;
+Title = 'Z dystansu' ;
+Title = 'Lista Schindlera' ;
+Title = 'Requiem dla snu' ;
+Title = 'Biutiful' ;
+Title = 'Czarny labedz' ;
+Title = 'Gladiator' ;
+Title = 'Dzien swira' ;
+Title = 'Pianista'.
+
+
+Example 6: Finding films with rating above 8.5
+-----------------------------------------------
+?- film(Title, _, _, _, _, _, _, _, Rating, _), Rating >= 8.5.
+Title = 'Zielona mila',
+Rating = 8.7 ;
+Title = 'Forrest Gump',
+Rating = 8.6 ;
+Title = 'Notykalni',
+Rating = 8.7.
+
+*/

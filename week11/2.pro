@@ -47,3 +47,79 @@ elements(article_8_2_a_ii, D, V) :-
 % ?- criminal_liability(Crime, Statute, defendant_X, victim_A).
 % Crime = war_crime,
 % Statute = article_8_2_a_i.
+
+/* 
+==================== SAMPLE INPUT/OUTPUT ====================
+
+Example 1: War Crime - Killing a Civilian
+------------------------------------------
+?- asserta(civilian(victim_A)).
+true.
+
+?- asserta(international_conflict(defendant_X, victim_A)).
+true.
+
+?- asserta(act(defendant_X, killed, victim_A)).
+true.
+
+?- criminal_liability(Crime, Statute, defendant_X, victim_A).
+Crime = war_crime,
+Statute = article_8_2_a_i.
+
+
+Example 2: War Crime - Torturing a Prisoner of War
+---------------------------------------------------
+?- asserta(prisoner_of_war(victim_B)).
+true.
+
+?- asserta(international_conflict(defendant_Y, victim_B)).
+true.
+
+?- asserta(act(defendant_Y, tortured, victim_B)).
+true.
+
+?- criminal_liability(Crime, Statute, defendant_Y, victim_B).
+Crime = war_crime,
+Statute = article_8_2_a_ii.
+
+
+Example 3: War Crime - Killing Medical Personnel
+-------------------------------------------------
+?- asserta(medical_personnel(doctor_smith)).
+true.
+
+?- asserta(international_conflict(soldier_jones, doctor_smith)).
+true.
+
+?- asserta(act(soldier_jones, killed, doctor_smith)).
+true.
+
+?- criminal_liability(Crime, Statute, soldier_jones, doctor_smith).
+Crime = war_crime,
+Statute = article_8_2_a_i.
+
+
+Example 4: Checking if a person is protected
+---------------------------------------------
+?- asserta(civilian(john)).
+true.
+
+?- protected_by_geneva_convention(john).
+true.
+
+?- asserta(religious_personnel(priest_mary)).
+true.
+
+?- protected_by_geneva_convention(priest_mary).
+true.
+
+
+Example 5: Listing all crimes
+------------------------------
+?- crime(X).
+X = genocide ;
+X = war_crime ;
+X = crime_against_humanity ;
+X = crime_of_aggression.
+
+*/
