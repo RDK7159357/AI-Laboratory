@@ -1,0 +1,1214 @@
+================================================================================
+                    AI LABORATORY - THEORY QUESTIONS
+================================================================================
+
+QUESTION 1: Design a rational agent for a stock market trading system. 
+What environmental assumptions would affect its effectiveness?
+
+ANSWER:
+
+A. RATIONAL AGENT DESIGN FOR STOCK TRADING SYSTEM:
+
+1. AGENT ARCHITECTURE:
+   
+   PEAS Description:
+   - Performance Measure: Maximize returns, minimize risk, maintain portfolio diversity
+   - Environment: Stock market (prices, volumes, news, economic indicators)
+   - Actuators: Buy orders, sell orders, hold decisions, portfolio rebalancing
+   - Sensors: Market data feeds, news APIs, technical indicators, order book data
+
+2. AGENT COMPONENTS:
+
+   a) Perception Module:
+      - Real-time price monitoring
+      - Volume tracking
+      - News sentiment analysis
+      - Technical indicator calculation (RSI, MACD, Moving Averages)
+      - Fundamental data collection (P/E ratios, earnings reports)
+
+   b) Decision-Making Module:
+      - Rule-based trading strategies
+      - Machine learning models for prediction
+      - Risk assessment algorithms
+      - Portfolio optimization
+
+   c) Action Module:
+      - Order execution (market, limit, stop-loss)
+      - Position sizing
+      - Portfolio rebalancing
+
+3. AGENT TYPE: Hybrid Agent
+   - Model-based: Maintains internal state of market conditions
+   - Goal-based: Targets profit objectives and risk thresholds
+   - Utility-based: Maximizes expected utility considering risk-reward tradeoffs
+   - Learning: Adapts strategies based on historical performance
+
+B. ENVIRONMENTAL ASSUMPTIONS AFFECTING EFFECTIVENESS:
+
+1. OBSERVABILITY:
+   - Fully Observable: Agent has complete market information (unrealistic)
+   - Partially Observable: Limited information, delayed data, hidden factors
+   - Impact: Partial observability requires probabilistic reasoning and uncertainty handling
+
+2. DETERMINISM:
+   - Deterministic: Same action always produces same result (unrealistic)
+   - Stochastic: Market outcomes are probabilistic
+   - Impact: Stochastic environments require probability-based decision making
+
+3. EPISODIC vs SEQUENTIAL:
+   - Sequential: Current decisions affect future states
+   - Impact: Requires long-term planning and consideration of consequences
+
+4. STATIC vs DYNAMIC:
+   - Dynamic: Market changes continuously while agent deliberates
+   - Impact: Requires real-time processing and quick decision-making
+
+5. DISCRETE vs CONTINUOUS:
+   - Continuous: Price, time, and quantities are continuous
+   - Impact: Requires handling of continuous state spaces
+
+6. SINGLE vs MULTI-AGENT:
+   - Multi-agent: Multiple traders competing
+   - Impact: Game theory considerations, strategic behavior needed
+
+7. CRITICAL ASSUMPTIONS:
+   
+   a) Market Efficiency:
+      - Weak form: Historical prices reflected
+      - Semi-strong: Public information reflected
+      - Strong form: All information reflected
+      - Impact: Affects profitability of different strategies
+
+   b) Liquidity Assumption:
+      - Sufficient market depth for trades
+      - Impact: Large orders may move markets
+
+   c) Transaction Costs:
+      - Commission, slippage, market impact
+      - Impact: Affects profitability, especially for high-frequency trading
+
+   d) Information Availability:
+      - Access to real-time data
+      - Quality and reliability of data
+      - Impact: Affects prediction accuracy
+
+   e) Regulatory Environment:
+      - Trading rules and restrictions
+      - Impact: Constrains allowable actions
+
+   f) Market Volatility:
+      - Assumption about price movement patterns
+      - Impact: Affects risk management strategies
+
+
+================================================================================
+
+QUESTION 2: Analyze the role of heuristic functions in informed search. 
+How does the choice of heuristic affect the outcome of A* search in a 
+grid-based environment?
+
+ANSWER:
+
+A. ROLE OF HEURISTIC FUNCTIONS IN INFORMED SEARCH:
+
+1. DEFINITION:
+   A heuristic function h(n) estimates the cost from node n to the goal.
+   It guides the search toward promising paths without exhaustive exploration.
+
+2. KEY PURPOSES:
+
+   a) Efficiency Enhancement:
+      - Reduces nodes explored compared to uninformed search
+      - Directs search toward goal-relevant regions
+      
+   b) Optimality Guarantee (with admissibility):
+      - Admissible heuristic: h(n) ≤ h*(n) (never overestimates)
+      - Ensures A* finds optimal solution
+      
+   c) Performance Improvement:
+      - Better heuristics → fewer node expansions
+      - Trade-off: computation time vs search reduction
+
+3. PROPERTIES OF GOOD HEURISTICS:
+
+   a) Admissibility:
+      h(n) ≤ actual cost to goal
+      Required for optimal solutions in A*
+      
+   b) Consistency (Monotonicity):
+      h(n) ≤ c(n,a,n') + h(n')
+      Ensures optimal path to any node when first reached
+      
+   c) Accuracy:
+      Closer to h*(n) → more efficient search
+      
+   d) Computational Efficiency:
+      Fast to compute (overhead vs benefit)
+
+B. A* SEARCH AND HEURISTIC CHOICE:
+
+A* Evaluation Function: f(n) = g(n) + h(n)
+- g(n): Actual cost from start to n
+- h(n): Estimated cost from n to goal
+- f(n): Estimated total cost through n
+
+C. GRID-BASED ENVIRONMENT HEURISTICS:
+
+1. MANHATTAN DISTANCE (L1):
+   h(n) = |x₁ - x₂| + |y₁ - y₂|
+   
+   - Use Case: Grid with 4-directional movement (up, down, left, right)
+   - Properties: Admissible, consistent
+   - Effect: Optimal paths in 4-connected grids
+   - Nodes Expanded: Moderate
+   - Example: (0,0) to (3,4) → h = 3 + 4 = 7
+
+2. EUCLIDEAN DISTANCE (L2):
+   h(n) = √[(x₁ - x₂)² + (y₁ - y₂)²]
+   
+   - Use Case: Grid with 8-directional movement or continuous space
+   - Properties: Admissible, consistent
+   - Effect: More accurate for diagonal movement
+   - Nodes Expanded: Fewer than Manhattan
+   - Example: (0,0) to (3,4) → h = √(9 + 16) = 5
+
+3. CHEBYSHEV DISTANCE (L∞):
+   h(n) = max(|x₁ - x₂|, |y₁ - y₂|)
+   
+   - Use Case: 8-directional with uniform diagonal cost
+   - Properties: Admissible, consistent
+   - Effect: Optimal for chess-king movement
+   - Example: (0,0) to (3,4) → h = max(3,4) = 4
+
+4. DIAGONAL DISTANCE:
+   h(n) = max(|x₁ - x₂|, |y₁ - y₂|) + (√2 - 1) × min(|x₁ - x₂|, |y₁ - y₂|)
+   
+   - Use Case: 8-directional with diagonal cost = √2
+   - Properties: More accurate than Chebyshev
+   - Effect: Better path costs
+
+5. ZERO HEURISTIC:
+   h(n) = 0
+   
+   - Effect: A* becomes Dijkstra's algorithm
+   - Nodes Expanded: Maximum (explores all directions equally)
+   - Guarantee: Optimal, but inefficient
+
+D. IMPACT OF HEURISTIC CHOICE ON A* OUTCOMES:
+
+1. ADMISSIBLE HEURISTICS (h(n) ≤ h*(n)):
+   
+   Effect on Optimality:
+   - Guarantees optimal solution
+   - Never eliminates optimal path from consideration
+   
+   Effect on Efficiency:
+   - Better (higher, but still admissible) → fewer nodes expanded
+   - h₂ dominates h₁ if h₂(n) ≥ h₁(n) for all n → h₂ is better
+
+2. NON-ADMISSIBLE HEURISTICS (h(n) > h*(n)):
+   
+   Effect on Optimality:
+   - May return suboptimal solution
+   - Can prune optimal paths
+   
+   Effect on Efficiency:
+   - May explore fewer nodes
+   - Faster but loses optimality guarantee
+
+3. CONSISTENCY IMPACT:
+   
+   Consistent Heuristic:
+   - First path to node is optimal
+   - No need to reopen nodes
+   - More efficient
+   
+   Non-consistent (but admissible):
+   - May need to reopen nodes
+   - Still finds optimal solution
+   - Less efficient
+
+4. PRACTICAL EXAMPLES IN GRID:
+
+   Scenario: 10×10 grid, start (0,0), goal (9,9), obstacles present
+   
+   a) Manhattan Distance (4-connected):
+      - Nodes Expanded: ~50-80
+      - Path Length: Optimal
+      - Time: Fast
+      
+   b) Euclidean Distance (8-connected):
+      - Nodes Expanded: ~30-50
+      - Path Length: Optimal
+      - Time: Fastest
+      
+   c) Zero Heuristic:
+      - Nodes Expanded: ~100+ (full Dijkstra)
+      - Path Length: Optimal
+      - Time: Slow
+      
+   d) Overestimating Heuristic (2 × Euclidean):
+      - Nodes Expanded: ~20-30
+      - Path Length: Possibly suboptimal
+      - Time: Very fast
+
+5. TRADE-OFFS:
+
+   Accuracy vs Computation:
+   - Complex heuristics (precomputed databases) → more accurate
+   - Simple heuristics (Manhattan) → faster to compute
+   
+   Optimality vs Speed:
+   - Admissible → optimal but slower
+   - Weighted A* (w × h(n), w > 1) → faster but suboptimal
+
+
+================================================================================
+
+QUESTION 3: Construct a knowledge base using first-order logic for a 
+university domain including students, courses, and faculty. Define 
+appropriate predicates and rules.
+
+ANSWER:
+
+A. DOMAIN ELEMENTS:
+   - Students: Individuals enrolled in courses
+   - Courses: Academic subjects taught
+   - Faculty: Professors teaching courses
+   - Departments: Academic divisions
+   - Prerequisites: Course dependencies
+
+B. PREDICATES DEFINITION:
+
+1. BASIC PREDICATES:
+
+   Student(x)              - x is a student
+   Faculty(x)              - x is a faculty member
+   Course(x)               - x is a course
+   Department(x)           - x is a department
+
+2. RELATIONSHIP PREDICATES:
+
+   EnrolledIn(s, c)        - Student s is enrolled in course c
+   Teaches(f, c)           - Faculty f teaches course c
+   Prerequisite(c1, c2)    - Course c1 is prerequisite for c2
+   MemberOf(p, d)          - Person p is member of department d
+   OfferedBy(c, d)         - Course c is offered by department d
+   AdvisedBy(s, f)         - Student s is advised by faculty f
+   Passed(s, c)            - Student s has passed course c
+   Grade(s, c, g)          - Student s received grade g in course c
+
+3. PROPERTY PREDICATES:
+
+   Major(s, d)             - Student s majors in department d
+   Credits(c, n)           - Course c has n credit hours
+   GPA(s, x)               - Student s has GPA of x
+   Year(s, y)              - Student s is in year y (1-4)
+   Tenured(f)              - Faculty f is tenured
+   FullTime(s)             - Student s is full-time
+   Undergraduate(s)        - Student s is undergraduate
+   Graduate(s)             - Student s is graduate student
+
+C. KNOWLEDGE BASE (FACTS):
+
+1. STUDENTS:
+   Student(Alice)
+   Student(Bob)
+   Student(Charlie)
+   Student(Diana)
+   Undergraduate(Alice)
+   Undergraduate(Bob)
+   Graduate(Charlie)
+   Graduate(Diana)
+   Year(Alice, 2)
+   Year(Bob, 3)
+   FullTime(Alice)
+   FullTime(Charlie)
+   GPA(Alice, 3.8)
+   GPA(Bob, 3.2)
+
+2. FACULTY:
+   Faculty(DrSmith)
+   Faculty(DrJones)
+   Faculty(DrBrown)
+   Faculty(DrWilson)
+   Tenured(DrSmith)
+   Tenured(DrJones)
+
+3. DEPARTMENTS:
+   Department(ComputerScience)
+   Department(Mathematics)
+   Department(Physics)
+   Department(Engineering)
+
+4. COURSES:
+   Course(CS101)
+   Course(CS201)
+   Course(CS301)
+   Course(MATH101)
+   Course(MATH201)
+   Course(PHYS101)
+   Credits(CS101, 3)
+   Credits(CS201, 4)
+   Credits(CS301, 4)
+   Credits(MATH101, 3)
+   Credits(MATH201, 3)
+
+5. RELATIONSHIPS:
+   MemberOf(DrSmith, ComputerScience)
+   MemberOf(DrJones, ComputerScience)
+   MemberOf(DrBrown, Mathematics)
+   MemberOf(DrWilson, Physics)
+   
+   OfferedBy(CS101, ComputerScience)
+   OfferedBy(CS201, ComputerScience)
+   OfferedBy(CS301, ComputerScience)
+   OfferedBy(MATH101, Mathematics)
+   OfferedBy(MATH201, Mathematics)
+   
+   Major(Alice, ComputerScience)
+   Major(Bob, ComputerScience)
+   Major(Charlie, Mathematics)
+   
+   Teaches(DrSmith, CS101)
+   Teaches(DrSmith, CS201)
+   Teaches(DrJones, CS301)
+   Teaches(DrBrown, MATH101)
+   
+   EnrolledIn(Alice, CS101)
+   EnrolledIn(Alice, MATH101)
+   EnrolledIn(Bob, CS201)
+   EnrolledIn(Bob, CS301)
+   
+   AdvisedBy(Alice, DrSmith)
+   AdvisedBy(Bob, DrSmith)
+   AdvisedBy(Charlie, DrBrown)
+   
+   Prerequisite(CS101, CS201)
+   Prerequisite(CS201, CS301)
+   Prerequisite(MATH101, MATH201)
+   
+   Passed(Alice, CS101)
+   Passed(Bob, CS101)
+   Passed(Bob, CS201)
+   
+   Grade(Alice, CS101, A)
+   Grade(Bob, CS101, B)
+   Grade(Bob, CS201, A)
+
+D. RULES (INFERENCE):
+
+1. ELIGIBILITY RULES:
+
+   // Student can enroll if prerequisites are satisfied
+   CanEnroll(s, c) ← Student(s) ∧ Course(c) ∧ 
+                     ∀p (Prerequisite(p, c) → Passed(s, p))
+   
+   // Alternative: Student can enroll if no prerequisites
+   CanEnroll(s, c) ← Student(s) ∧ Course(c) ∧ 
+                     ¬∃p Prerequisite(p, c)
+
+2. ACADEMIC STANDING:
+
+   // Good academic standing
+   GoodStanding(s) ← Student(s) ∧ GPA(s, g) ∧ g ≥ 2.0
+   
+   // Dean's List
+   DeansList(s) ← Student(s) ∧ GPA(s, g) ∧ g ≥ 3.5 ∧ FullTime(s)
+   
+   // Academic probation
+   OnProbation(s) ← Student(s) ∧ GPA(s, g) ∧ g < 2.0
+
+3. GRADUATION REQUIREMENTS:
+
+   // Can graduate (simplified)
+   CanGraduate(s) ← Undergraduate(s) ∧ 
+                    CompletedCredits(s, cr) ∧ cr ≥ 120 ∧
+                    GPA(s, g) ∧ g ≥ 2.0 ∧
+                    CompletedMajorReqs(s)
+   
+   // Major requirements satisfied
+   CompletedMajorReqs(s) ← Major(s, d) ∧
+                          ∀c (RequiredFor(c, d) → Passed(s, c))
+
+4. TEACHING CONSTRAINTS:
+
+   // Faculty can teach courses in their department
+   QualifiedToTeach(f, c) ← Faculty(f) ∧ Course(c) ∧ 
+                            MemberOf(f, d) ∧ OfferedBy(c, d)
+   
+   // Course has instructor
+   HasInstructor(c) ← ∃f (Faculty(f) ∧ Teaches(f, c))
+   
+   // Teaching load limit
+   Overloaded(f) ← Faculty(f) ∧ 
+                   Count({c | Teaches(f, c)}) > 3
+
+5. PREREQUISITE CHAIN:
+
+   // Transitive prerequisite
+   IndirectPrereq(c1, c2) ← Prerequisite(c1, c2)
+   
+   IndirectPrereq(c1, c3) ← Prerequisite(c1, c2) ∧ 
+                            IndirectPrereq(c2, c3)
+   
+   // All prerequisites satisfied
+   AllPrereqsMet(s, c) ← ∀p (IndirectPrereq(p, c) → Passed(s, p))
+
+6. ADVISING RULES:
+
+   // Same department advisor
+   SameDeptAdvisor(s, f) ← AdvisedBy(s, f) ∧ 
+                           Major(s, d) ∧ MemberOf(f, d)
+   
+   // Advisee of faculty
+   Advisee(f, s) ← AdvisedBy(s, f)
+   
+   // Number of advisees
+   AdviseeCount(f, n) ← Faculty(f) ∧ 
+                        n = Count({s | AdvisedBy(s, f)})
+
+7. ENROLLMENT RULES:
+
+   // Classmate relationship
+   Classmates(s1, s2) ← Student(s1) ∧ Student(s2) ∧ s1 ≠ s2 ∧
+                        ∃c (EnrolledIn(s1, c) ∧ EnrolledIn(s2, c))
+   
+   // Course capacity
+   CourseIsFull(c) ← Course(c) ∧ Capacity(c, max) ∧
+                     Count({s | EnrolledIn(s, c)}) ≥ max
+   
+   // Full-time student (≥12 credits)
+   IsFullTime(s) ← Student(s) ∧ TotalCredits(s, cr) ∧ cr ≥ 12
+   
+   TotalCredits(s, total) ← Student(s) ∧ 
+                            total = Sum({n | EnrolledIn(s, c) ∧ Credits(c, n)})
+
+8. GRADE RULES:
+
+   // Passed with specific grade
+   PassedWithGrade(s, c, g) ← Grade(s, c, g) ∧ g ∈ {A, B, C}
+   
+   // Failed course
+   Failed(s, c) ← Grade(s, c, g) ∧ g ∈ {D, F}
+   
+   // Honor student
+   HonorStudent(s) ← Student(s) ∧ 
+                     ∀c (Grade(s, c, g) → g ∈ {A, B})
+
+E. SAMPLE QUERIES:
+
+1. Who can enroll in CS301?
+   ?- CanEnroll(s, CS301)
+   
+2. Which students are on the Dean's List?
+   ?- DeansList(s)
+   
+3. What courses does Alice need to pass to enroll in CS301?
+   ?- IndirectPrereq(c, CS301) ∧ ¬Passed(Alice, c)
+   
+4. Which faculty members are teaching CS courses?
+   ?- Teaches(f, c) ∧ OfferedBy(c, ComputerScience)
+   
+5. Are Bob and Alice classmates?
+   ?- Classmates(Bob, Alice)
+   
+6. Which students are advised by DrSmith?
+   ?- AdvisedBy(s, DrSmith)
+
+F. INTEGRITY CONSTRAINTS:
+
+1. A student cannot be both undergraduate and graduate:
+   ¬(Undergraduate(s) ∧ Graduate(s))
+
+2. A course must have exactly one department:
+   ∀c (Course(c) → ∃!d (Department(d) ∧ OfferedBy(c, d)))
+
+3. Prerequisites cannot be circular:
+   ¬∃c (IndirectPrereq(c, c))
+
+4. GPA must be between 0 and 4:
+   ∀s (GPA(s, g) → 0 ≤ g ≤ 4.0)
+
+5. A student cannot enroll in the same course twice simultaneously:
+   ¬∃s,c (EnrolledIn(s, c) ∧ Passed(s, c))
+
+
+================================================================================
+
+QUESTION 4: Construct a detailed comparison of heuristic search techniques 
+(Hill Climbing, A*, AO*) in terms of completeness, optimality, and 
+computational performance.
+
+ANSWER:
+
+================================================================================
+                    COMPARISON OF HEURISTIC SEARCH TECHNIQUES
+================================================================================
+
+A. OVERVIEW OF ALGORITHMS:
+
+1. HILL CLIMBING:
+   - Local search algorithm
+   - Moves to neighbor with better evaluation
+   - No backtracking
+   - Greedy approach
+
+2. A* SEARCH:
+   - Informed graph search
+   - Uses f(n) = g(n) + h(n)
+   - Best-first search with admissible heuristic
+   - Complete path planning
+
+3. AO* SEARCH:
+   - AND-OR graph search
+   - Handles decomposable problems
+   - Solves problems with multiple sub-goals
+   - Goal-reduction approach
+
+================================================================================
+
+B. DETAILED COMPARISON TABLE:
+
+┌──────────────────┬─────────────────────┬─────────────────────┬─────────────────────┐
+│   PROPERTY       │   HILL CLIMBING     │      A* SEARCH      │     AO* SEARCH      │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ COMPLETENESS     │                     │                     │                     │
+│                  │ INCOMPLETE          │ COMPLETE            │ COMPLETE            │
+│                  │ - Can get stuck in  │ - Finds solution    │ - Finds solution    │
+│                  │   local maxima      │   if one exists     │   if one exists     │
+│                  │ - Fails on plateaus │ - Guaranteed in     │ - Guaranteed for    │
+│                  │ - Stuck on ridges   │   finite spaces     │   finite AND-OR     │
+│                  │                     │ - With finite       │   graphs            │
+│                  │                     │   branching factor  │                     │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ OPTIMALITY       │                     │                     │                     │
+│                  │ NOT OPTIMAL         │ OPTIMAL             │ OPTIMAL             │
+│                  │ - Finds local       │ - Guaranteed        │ - Finds minimum     │
+│                  │   optima only       │   optimal with      │   cost solution     │
+│                  │ - First acceptable  │   admissible h(n)   │ - Considers all     │
+│                  │   solution          │ - Consistent h(n)   │   AND-OR paths      │
+│                  │ - Depends on start  │   ensures first     │ - Minimizes sum     │
+│                  │   state             │   path is optimal   │   of costs          │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ TIME COMPLEXITY  │                     │                     │                     │
+│                  │ O(∞)                │ O(b^d)              │ O(b^d)              │
+│                  │ - Can loop forever  │ - Exponential in    │ - Depends on        │
+│                  │ - Usually fast if   │   solution depth    │   graph structure   │
+│                  │   succeeds          │ - With good h(n):   │ - Better than A*    │
+│                  │ - Linear in good    │   O(b^(d-δ))        │   for decomposable  │
+│                  │   cases             │   where δ is error  │   problems          │
+│                  │                     │   in heuristic      │                     │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ SPACE COMPLEXITY │                     │                     │                     │
+│                  │ O(1)                │ O(b^d)              │ O(b^d)              │
+│                  │ - Only current      │ - Stores all        │ - Stores explored   │
+│                  │   state stored      │   generated nodes   │   AND-OR graph      │
+│                  │ - No memory of      │ - Open & closed     │ - Solution graph    │
+│                  │   visited states    │   lists             │ - Partial solutions │
+│                  │ - Memory efficient  │ - Can be huge       │                     │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ SEARCH STRATEGY  │                     │                     │                     │
+│                  │ LOCAL SEARCH        │ GLOBAL SEARCH       │ GLOBAL SEARCH       │
+│                  │ - Greedy selection  │ - Systematic        │ - Systematic        │
+│                  │ - No backtracking   │ - Explores all      │ - AND-OR tree       │
+│                  │ - Current state     │   promising paths   │ - Decomposes goals  │
+│                  │   focus             │ - Priority queue    │ - Solves subgoals   │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ HEURISTIC USE    │                     │                     │                     │
+│                  │ EVALUATION ONLY     │ f(n) = g(n) + h(n)  │ COST ESTIMATION     │
+│                  │ - Only h(n)         │ - Actual + estimate │ - Estimates sub-    │
+│                  │ - No path cost      │ - Balanced approach │   problem costs     │
+│                  │ - Immediate value   │ - Admissibility req │ - AND-OR heuristic  │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ BACKTRACKING     │                     │                     │                     │
+│                  │ NO                  │ YES (implicit)      │ YES                 │
+│                  │ - Cannot undo       │ - Via priority      │ - Revises solution  │
+│                  │ - Forward only      │   queue             │ - Updates costs     │
+│                  │ - Restarts needed   │ - Explores altern.  │ - Dynamic updating  │
+├──────────────────┼─────────────────────┼─────────────────────┼─────────────────────┤
+│ PROBLEM TYPE     │                     │                     │                     │
+│                  │ OPTIMIZATION        │ PATH FINDING        │ GOAL DECOMPOSITION  │
+│                  │ - State space       │ - Single path       │ - AND-OR problems   │
+│                  │ - Continuous        │ - Sequential goals  │ - Multiple subgoals │
+│                  │ - Configuration     │ - Navigation        │ - Planning          │
+│                  │                     │ - Routing           │ - Task planning     │
+└──────────────────┴─────────────────────┴─────────────────────┴─────────────────────┘
+
+================================================================================
+
+C. DETAILED ANALYSIS:
+
+1. COMPLETENESS ANALYSIS:
+
+   HILL CLIMBING - INCOMPLETE:
+   
+   Failure Cases:
+   a) Local Maxima:
+      - Peak that isn't global maximum
+      - All neighbors are worse
+      - Algorithm terminates suboptimally
+      
+   b) Plateaus (Flat Local Maximum):
+      - Large area with same evaluation
+      - No direction to improve
+      - Random walk may help
+      
+   c) Ridges:
+      - Solution along narrow path
+      - Hard to navigate by local moves
+      - Requires specific move sequences
+   
+   Mitigation Strategies:
+   - Random restarts: Try multiple starting points
+   - Simulated annealing: Allow occasional uphill moves
+   - Stochastic hill climbing: Random selection among uphill moves
+
+   A* SEARCH - COMPLETE:
+   
+   Guarantee Conditions:
+   - Finite branching factor
+   - Finite graph or positive step costs
+   - Admissible heuristic
+   
+   Why Complete:
+   - Systematically explores all paths
+   - Priority queue ensures no path missed
+   - Will eventually find solution if exists
+
+   AO* SEARCH - COMPLETE:
+   
+   Guarantee Conditions:
+   - Finite AND-OR graph
+   - All OR nodes have finite alternatives
+   - No infinite loops in AND arcs
+   
+   Why Complete:
+   - Explores all decompositions
+   - Handles complex goal structures
+   - Systematic exploration of solution space
+
+2. OPTIMALITY ANALYSIS:
+
+   HILL CLIMBING - NOT OPTIMAL:
+   
+   Limitations:
+   - Finds first acceptable solution
+   - Local optima traps
+   - Start-state dependent
+   - No global perspective
+   
+   Example:
+   Goal: Maximize f(x) = -x² + 4x
+   Start: x = 0
+   - Hill climbing moves to x = 2 (local max)
+   - This IS the global max (lucky!)
+   
+   Counter-example:
+   Goal: Maximize f(x) = sin(x) on [0, 10π]
+   Start: x = 0
+   - Hill climbing finds first peak at x = π/2
+   - Misses higher peaks at 5π/2, 9π/2, etc.
+
+   A* SEARCH - OPTIMAL:
+   
+   Optimality Theorem:
+   If h(n) is admissible, A* finds optimal solution.
+   
+   Proof Sketch:
+   - Suppose A* returns suboptimal path P
+   - Optimal path P* exists with lower cost
+   - Some node n on P* must be in open list
+   - f(n) = g(n) + h(n) ≤ g(n) + h*(n) = f*(n)
+   - Since P* is optimal: f(n) < cost(P)
+   - A* would expand n before returning P
+   - Contradiction!
+   
+   Consistency Bonus:
+   - Consistent h(n) → first path to node is optimal
+   - No need to reopen nodes
+   - More efficient
+
+   AO* SEARCH - OPTIMAL:
+   
+   Optimality for AND-OR Graphs:
+   - Finds minimum cost solution graph
+   - Considers all decompositions
+   - Dynamic programming principle
+   
+   Cost Calculation:
+   For OR nodes: min over alternatives
+   For AND nodes: sum of sub-problems
+   
+   Ensures globally optimal solution tree
+
+3. COMPUTATIONAL PERFORMANCE:
+
+   HILL CLIMBING:
+   
+   Time Complexity:
+   - Best Case: O(d) where d is depth to solution
+   - Worst Case: O(∞) if stuck in loop
+   - Average Case: Very fast if landscape is smooth
+   
+   Space Complexity:
+   - O(1) - only current state
+   - Extremely memory efficient
+   
+   Performance Factors:
+   - Quality of heuristic function
+   - Smoothness of state space
+   - Presence of local optima
+   
+   Practical Use:
+   - Quick approximate solutions
+   - Large state spaces where memory is constrained
+   - Continuous optimization problems
+
+   A* SEARCH:
+   
+   Time Complexity:
+   - O(b^d) worst case (b=branching, d=depth)
+   - With perfect h(n): O(d) linear!
+   - With good h(n): O(b^(d-k)) where k is heuristic accuracy
+   
+   Effective Branching Factor:
+   - b* = actual nodes expanded per level
+   - Better h(n) → smaller b*
+   
+   Space Complexity:
+   - O(b^d) - must store all generated nodes
+   - Major limitation for large problems
+   - IDA* variant addresses this: O(d) space
+   
+   Performance Factors:
+   - Heuristic quality (most critical)
+   - Branching factor
+   - Solution depth
+   - Heuristic computation time
+   
+   Optimizations:
+   - Iterative Deepening A* (IDA*): O(d) space
+   - Simplified Memory-bounded A* (SMA*): Bounded memory
+   - Weighted A*: Trade optimality for speed
+
+   AO* SEARCH:
+   
+   Time Complexity:
+   - Depends on AND-OR graph structure
+   - Better than A* for decomposable problems
+   - Reuses sub-problem solutions
+   
+   Space Complexity:
+   - O(b^d) for solution graph
+   - Stores partial solutions
+   - Can be more efficient than A* for certain problems
+   
+   Performance Factors:
+   - Degree of problem decomposability
+   - Heuristic quality for sub-problems
+   - Graph structure (AND vs OR ratio)
+   
+   Advantages:
+   - Natural for hierarchical problems
+   - Reuses computed solutions
+   - Handles multiple goals elegantly
+
+4. PRACTICAL COMPARISON EXAMPLES:
+
+   SCENARIO 1: 8-Puzzle Problem
+   
+   Hill Climbing:
+   - Nodes Expanded: 10-50 (if successful)
+   - Success Rate: ~60%
+   - Time: Very fast
+   - Result: Often fails (local minima)
+   
+   A*:
+   - Nodes Expanded: 100-1000
+   - Success Rate: 100%
+   - Time: Fast
+   - Result: Always optimal
+   
+   AO*:
+   - Not suitable (not decomposable)
+
+   SCENARIO 2: Route Planning (1000 cities)
+   
+   Hill Climbing:
+   - Fast initial solution
+   - Poor quality (30-50% above optimal)
+   - Memory: Minimal
+   
+   A*:
+   - Optimal solution
+   - Memory intensive (millions of nodes)
+   - May not fit in memory
+   
+   AO*:
+   - Not suitable (not AND-OR structure)
+
+   SCENARIO 3: Robot Task Planning
+   (Make tea: boil water AND add tea AND add milk)
+   
+   Hill Climbing:
+   - Not suitable (requires decomposition)
+   
+   A*:
+   - Can work but treats as sequential
+   - Doesn't exploit AND structure
+   - Explores unnecessary orderings
+   
+   AO*:
+   - Natural fit
+   - Handles AND goals elegantly
+   - Finds optimal decomposition
+   - More efficient than A*
+
+5. ALGORITHM SELECTION GUIDELINES:
+
+   Use HILL CLIMBING when:
+   ✓ Quick approximate solution acceptable
+   ✓ Memory extremely constrained
+   ✓ Smooth state space
+   ✓ Local optima are acceptable
+   ✓ Can use random restarts
+   
+   Use A* when:
+   ✓ Optimal solution required
+   ✓ Path planning problem
+   ✓ Good heuristic available
+   ✓ Sufficient memory
+   ✓ Complete exploration needed
+   
+   Use AO* when:
+   ✓ Problem has AND-OR structure
+   ✓ Goal decomposition needed
+   ✓ Multiple sub-goals
+   ✓ Hierarchical planning
+   ✓ Task planning with alternatives
+
+================================================================================
+
+D. PERFORMANCE METRICS SUMMARY:
+
+┌─────────────────────┬──────────────┬──────────────┬──────────────┐
+│      METRIC         │ Hill Climb   │     A*       │     AO*      │
+├─────────────────────┼──────────────┼──────────────┼──────────────┤
+│ Completeness        │      ✗       │      ✓       │      ✓       │
+│ Optimality          │      ✗       │      ✓       │      ✓       │
+│ Time Efficiency     │    ★★★★★     │    ★★★       │    ★★★★      │
+│ Space Efficiency    │    ★★★★★     │    ★         │    ★★        │
+│ Solution Quality    │    ★★        │    ★★★★★     │    ★★★★★     │
+│ Ease of Implement   │    ★★★★★     │    ★★★       │    ★★        │
+└─────────────────────┴──────────────┴──────────────┴──────────────┘
+
+
+================================================================================
+
+QUESTION 5: Apply AO* algorithm to a simplified AND-OR graph representing 
+a robot's task plan. Explain how the optimal path is selected.
+
+ANSWER:
+
+A. PROBLEM SETUP: ROBOT TASK PLANNING
+
+SCENARIO: A robot must prepare a room for a meeting
+
+MAIN GOAL (A): Room Ready for Meeting
+
+This decomposes into:
+- OR Choice 1: Quick Preparation (B)
+- OR Choice 2: Thorough Preparation (C)
+
+TASK DECOMPOSITION:
+
+A (Room Ready)
+├── OR → B (Quick Prep) 
+│        └── AND → {D (Vacuum), E (Arrange Chairs)}
+│
+└── OR → C (Thorough Prep)
+         └── AND → {F (Deep Clean), G (Arrange Furniture), H (Set Temperature)}
+
+FURTHER DECOMPOSITION:
+
+D (Vacuum) - Primitive task, Cost: 5
+E (Arrange Chairs) - Primitive task, Cost: 3
+
+F (Deep Clean)
+├── OR → I (Manual Clean), Cost: 15
+└── OR → J (Robot Clean), Cost: 10
+
+G (Arrange Furniture)
+├── AND → {K (Move Table), L (Move Chairs)}
+K (Move Table) - Primitive, Cost: 8
+L (Move Chairs) - Primitive, Cost: 4
+
+H (Set Temperature) - Primitive task, Cost: 2
+
+B. AND-OR GRAPH REPRESENTATION:
+
+NODE TYPES:
+- OR Nodes (circles): Choose one alternative (minimize cost)
+- AND Nodes (bars): Must complete all sub-tasks (sum costs)
+- Primitive Nodes (rectangles): Leaf nodes with fixed costs
+
+GRAPH STRUCTURE:
+
+A [OR]
+├─(0)→ B [AND]
+│      ├── D [Primitive] Cost: 5
+│      └── E [Primitive] Cost: 3
+│
+└─(0)→ C [AND]
+       ├── F [OR]
+       │   ├─(0)→ I [Primitive] Cost: 15
+       │   └─(0)→ J [Primitive] Cost: 10
+       ├── G [AND]
+       │   ├── K [Primitive] Cost: 8
+       │   └── L [Primitive] Cost: 4
+       └── H [Primitive] Cost: 2
+
+C. AO* ALGORITHM EXECUTION:
+
+STEP 1: Initialize
+- Start at goal node A
+- h(A) = unknown (to be computed)
+- Mark A as unexpanded
+
+STEP 2: Expand Node A (OR node)
+- Two alternatives: B and C
+- Cost to choose: 0 for both
+- Need to compute h(B) and h(C)
+- Mark A as expanded, B and C as unexpanded
+
+STEP 3: Expand Node B (AND node)
+- Sub-tasks: D and E
+- Both are primitives
+- h(D) = 5 (actual cost)
+- h(E) = 3 (actual cost)
+- h(B) = 0 + h(D) + h(E) = 0 + 5 + 3 = 8
+- Mark B as solved (all children are primitives)
+
+STEP 4: Expand Node C (AND node)
+- Sub-tasks: F, G, H
+- H is primitive: h(H) = 2
+- F and G need expansion
+- Mark C as expanded
+
+STEP 5: Expand Node F (OR node)
+- Two alternatives: I and J
+- h(I) = 15 (primitive)
+- h(J) = 10 (primitive)
+- h(F) = min(15, 10) = 10
+- Best choice: J (Robot Clean)
+- Mark F as solved
+
+STEP 6: Expand Node G (AND node)
+- Sub-tasks: K and L
+- h(K) = 8 (primitive)
+- h(L) = 4 (primitive)
+- h(G) = 0 + h(K) + h(L) = 0 + 8 + 4 = 12
+- Mark G as solved
+
+STEP 7: Update Node C
+- All children solved
+- h(C) = 0 + h(F) + h(G) + h(H)
+- h(C) = 0 + 10 + 12 + 2 = 24
+- Mark C as solved
+
+STEP 8: Update Node A (root)
+- Both alternatives solved
+- h(A) = min(h(B), h(C))
+- h(A) = min(8, 24) = 8
+- Best choice: B (Quick Prep)
+- Mark A as solved
+
+D. OPTIMAL SOLUTION PATH:
+
+SELECTED PLAN:
+A → B → {D, E}
+
+Interpretation:
+1. Choose Quick Preparation (B) over Thorough Preparation (C)
+2. Execute two tasks in parallel:
+   - D: Vacuum the room (cost 5)
+   - E: Arrange chairs (cost 3)
+3. Total cost: 8
+
+ALTERNATIVE PATH (Not chosen):
+A → C → {F→J, G→{K,L}, H}
+Cost: 24
+
+E. HOW OPTIMAL PATH IS SELECTED:
+
+1. BOTTOM-UP COST PROPAGATION:
+
+   a) Primitive Nodes:
+      - Have fixed costs
+      - h(node) = actual cost
+   
+   b) AND Nodes:
+      - Must execute all children
+      - h(node) = Σ h(child) + edge_costs
+      - Example: h(B) = h(D) + h(E) = 5 + 3 = 8
+   
+   c) OR Nodes:
+      - Choose minimum cost alternative
+      - h(node) = min{h(alternative)} + edge_costs
+      - Example: h(F) = min(h(I), h(J)) = min(15, 10) = 10
+
+2. DYNAMIC PROGRAMMING PRINCIPLE:
+
+   Each node's optimal cost depends on:
+   - Type of node (AND/OR)
+   - Children's optimal costs
+   - Edge costs
+   
+   Formula:
+   For OR node n with children c₁, c₂, ..., cₖ:
+   h(n) = min{cost(n,cᵢ) + h(cᵢ)} for i = 1 to k
+   
+   For AND node n with children c₁, c₂, ..., cₖ:
+   h(n) = Σ(cost(n,cᵢ) + h(cᵢ)) for i = 1 to k
+
+3. ITERATIVE REFINEMENT:
+
+   Initial Phase:
+   - Expand unexplored nodes
+   - Compute estimates using heuristics
+   
+   Update Phase:
+   - When child costs change, update parent
+   - Propagate changes up the tree
+   - Re-select best alternatives at OR nodes
+   
+   Termination:
+   - Root node is solved
+   - All nodes in solution graph are solved
+   - Costs have converged
+
+4. SOLUTION GRAPH CONSTRUCTION:
+
+   Step-by-step:
+   1. Start at root (A)
+   2. If OR node: select minimum cost child
+   3. If AND node: include all children
+   4. Recursively build for selected children
+   5. Stop at primitive nodes
+   
+   For our example:
+   A (OR) → selects B (cost 8 < 24)
+   B (AND) → includes both D and E
+   D (primitive) → leaf
+   E (primitive) → leaf
+   
+   Final Solution Graph:
+        A
+        |
+        B
+       / \
+      D   E
+
+F. DETAILED COST CALCULATION TABLE:
+
+┌──────┬───────┬────────────────────────┬──────────────┬───────────┐
+│ Node │ Type  │ Computation            │ Cost         │ Choice    │
+├──────┼───────┼────────────────────────┼──────────────┼───────────┤
+│  D   │ Prim  │ Fixed                  │ 5            │ -         │
+│  E   │ Prim  │ Fixed                  │ 3            │ -         │
+│  I   │ Prim  │ Fixed                  │ 15           │ -         │
+│  J   │ Prim  │ Fixed                  │ 10           │ -         │
+│  K   │ Prim  │ Fixed                  │ 8            │ -         │
+│  L   │ Prim  │ Fixed                  │ 4            │ -         │
+│  H   │ Prim  │ Fixed                  │ 2            │ -         │
+├──────┼───────┼────────────────────────┼──────────────┼───────────┤
+│  B   │ AND   │ h(D) + h(E)            │ 5 + 3 = 8    │ D, E      │
+│  F   │ OR    │ min(h(I), h(J))        │ min(15,10)=10│ J         │
+│  G   │ AND   │ h(K) + h(L)            │ 8 + 4 = 12   │ K, L      │
+│  C   │ AND   │ h(F) + h(G) + h(H)     │ 10+12+2 = 24 │ F, G, H   │
+│  A   │ OR    │ min(h(B), h(C))        │ min(8,24) = 8│ B         │
+└──────┴───────┴────────────────────────┴──────────────┴───────────┘
+
+G. ALGORITHM PSEUDOCODE:
+
+```
+function AO_STAR(graph, start):
+    // Initialize
+    costs[start] = ∞
+    solved[start] = False
+    
+    while not solved[start]:
+        // Expand one unexpanded node
+        node = select_unexpanded_node(start)
+        
+        if node is primitive:
+            costs[node] = actual_cost(node)
+            solved[node] = True
+        
+        elif node is AND_node:
+            children = get_children(node)
+            costs[node] = sum(costs[child] for child in children)
+            
+            if all(solved[child] for child in children):
+                solved[node] = True
+        
+        elif node is OR_node:
+            alternatives = get_alternatives(node)
+            best = min(alternatives, key=lambda a: costs[a])
+            costs[node] = costs[best]
+            choice[node] = best
+            
+            if solved[best]:
+                solved[node] = True
+        
+        // Propagate cost changes upward
+        propagate_costs(node, graph)
+    
+    return extract_solution(start, choice)
+```
+
+H. ADVANTAGES OF AO* FOR ROBOT PLANNING:
+
+1. Natural Representation:
+   - Tasks naturally decompose (AND)
+   - Alternative methods available (OR)
+   - Hierarchical structure
+
+2. Optimal Solution:
+   - Guaranteed minimum cost
+   - Considers all alternatives
+   - Finds best decomposition
+
+3. Efficiency:
+   - Reuses sub-problem solutions
+   - Prunes suboptimal branches
+   - Dynamic programming benefits
+
+4. Flexibility:
+   - Handles complex task structures
+   - Supports parallel execution (AND nodes)
+   - Multiple solution strategies (OR nodes)
+
+I. COMPARISON WITH OTHER APPROACHES:
+
+If using A* Search:
+- Would need to enumerate all task sequences
+- Wouldn't naturally handle parallel tasks
+- Much larger search space
+- Example: {D,E} vs {E,D} treated as different paths
+
+If using Hill Climbing:
+- Might choose C initially (more thorough)
+- Could get stuck in local optimum
+- No guarantee of finding B
+
+AO* Advantages:
+- Direct representation of task structure
+- Optimal solution guaranteed
+- Efficient for hierarchical problems
+
+================================================================================
+
+END OF ANSWERS
+================================================================================
