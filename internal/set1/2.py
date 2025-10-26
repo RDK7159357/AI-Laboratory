@@ -1,5 +1,5 @@
 from pyswip import Prolog
-
+# b. Alpha Beta Pruning
 prolog = Prolog()
 prolog.consult('week4/game.pl')
 

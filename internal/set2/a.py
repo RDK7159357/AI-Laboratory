@@ -1,5 +1,6 @@
 from collections import deque
-
+# Exercises on Logic Programming Evaluation
+# a. Water Jug Problem
 def water_jug(c1, c2, target):
     visited, queue = set(), deque([((0, 0), [(0, 0)])])
     

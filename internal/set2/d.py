@@ -1,5 +1,5 @@
 from collections import deque
-
+# d. Blocks Rearrangement Problem
 def blocks_rearrange(initial, goal):
     queue = deque([(initial, [])])
     visited = {tuple(sorted(initial.items()))}

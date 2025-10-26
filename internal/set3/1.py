@@ -1,5 +1,6 @@
 from pyswip import Prolog
-
+# Exercises on Knowledge Representation using FOL
+# a. Knowledge Representation using FOL – Translate
 def translate(s):
     s = s.lower()
     if "not all" in s and "car" in s:

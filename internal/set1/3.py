@@ -3,7 +3,7 @@ graph = {
     'D': [], 'E': ['H'], 'F': ['I', 'J'], 'G': ['K', 'L'],
     'H': [], 'I': [], 'J': [], 'K': [], 'L': []
 }
-
+# c. Iterative Deepening Techniques
 def dls(start, goal, limit, path):
     path.append(start)
     if start == goal:

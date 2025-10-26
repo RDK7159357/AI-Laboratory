@@ -1,7 +1,7 @@
 from sympy import symbols
 from sympy.logic.boolalg import And, Or, Not, Implies
 from sympy.logic.inference import satisfiable
-
+# c. Check the availability
 def parse_atom(atom):
     mapping = {"rain": "Rain", "fog": "Fog", "sail": "Sail", "lifesaving": "Life", 
                "trophy": "Trophy", "cs": "CS", "dm": "DM", "neetha": "Neetha", "takes": "Takes"}

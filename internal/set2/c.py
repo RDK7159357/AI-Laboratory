@@ -1,5 +1,5 @@
 from simpleai.search import astar, SearchProblem
-
+# c. Eight Puzzle Problem
 class EightPuzzle(SearchProblem):
     def __init__(self, initial):
         self.goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)

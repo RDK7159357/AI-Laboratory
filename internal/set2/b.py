@@ -1,5 +1,5 @@
 from collections import deque
-
+# b. Monkey Banana Problem
 def monkey_banana():
     initial = ('door', 'window', False)
     goal = ('center', 'center', True)
@@ -11,7 +11,6 @@ def monkey_banana():
         if (m, b, on) == goal:
             return path
         
-        # Walk
         if not on:
             for loc in ['door', 'window', 'center']:
                 if m != loc:
@@ -20,7 +19,6 @@ def monkey_banana():
                         visited.add(state)
                         queue.append((state, path + [state]))
         
-        # Push box
         if not on and m == b:
             for loc in ['door', 'window', 'center']:
                 if b != loc:
@@ -28,9 +26,7 @@ def monkey_banana():
                     if state not in visited:
                         visited.add(state)
                         queue.append((state, path + [state]))
-        
-        # Climb
-        if not on and m == b:
+            
             state = (m, b, True)
             if state not in visited:
                 visited.add(state)
@@ -38,7 +34,8 @@ def monkey_banana():
     return None
 
 path = monkey_banana()
+print("Monkey-Banana Solution:")
+for i, s in enumerate(path if path else []):
+    print(f"Step {i}: {s}")
 if path:
-    for i, s in enumerate(path):
-        print(f"Step {i}: {s}")
     print("Grasp bananas!")

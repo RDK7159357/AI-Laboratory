@@ -1,5 +1,6 @@
 import math
-
+# Exercises on Building Games with AI
+#a. Minimax Algorithm
 class Node:
     def __init__(self, value=None, children=None):
         self.value = value

@@ -1,3 +1,4 @@
+# b. Knowledge Representation using FOL – Translate
 def translate_math(s):
     s = s.lower()
     if "for each integer x" in s and "x + y = 0" in s:
